@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./app.component.scss">
+  </head>
+  <body>
+    <div class="bx-main">
+      <!-- <app-personal-details></app-personal-details>
+      <app-official-details></app-official-details> -->
+
+      <h2>User Details Form</h2>
+  <form #userForm="ngForm" (ngSubmit)="saveUser()">
+ 
+<div class="form-group">
+  <label for="username">Username : </label>
+  <input type="text" id="username" name="username" class="form-control" 
+         [(ngModel)]="user.username" required minlength="3" maxlength="20" pattern="[a-zA-Z ]*">
+  <div *ngIf="userForm.controls['username']?.invalid && (userForm.controls['username']?.dirty || userForm.controls['username']?.touched)">
+    <div *ngIf="userForm.controls['username']?.errors?.required">Username is required.</div>
+    <div *ngIf="userForm.controls['username']?.errors?.minlength">Username must be at least 3 characters.</div>
+    <div *ngIf="userForm.controls['username']?.errors?.maxlength">Username cannot exceed 20 characters.</div>
+    <div *ngIf="userForm.controls['username']?.errors?.pattern">Username must contain only alphabetic characters.</div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="email">Email : </label>
+  <input type="email" id="email" name="email" class="form-control" [(ngModel)]="user.email" required email>
+  <div *ngIf="userForm.controls['email']?.invalid && (userForm.controls['email']?.dirty || userForm.controls['email']?.touched)">
+    <div *ngIf="userForm.controls['email']?.errors?.required">Email is required.</div>
+    <div *ngIf="userForm.controls['email']?.errors?.email">Invalid email format.</div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="address">Address : </label>
+  <textarea id="address" name="address" class="form-control" [(ngModel)]="user.address" required></textarea>
+  <div *ngIf="userForm.controls['address']?.invalid && (userForm.controls['address']?.dirty || userForm.controls['address']?.touched)">
+    <div *ngIf="userForm.controls['address']?.errors?.required">Address is required.</div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="dob">Date of Birth : </label>
+  <input type="date" id="dob" name="dob" class="form-control" [(ngModel)]="user.dob" required>
+  <div *ngIf="userForm.controls['dob']?.invalid && (userForm.controls['dob']?.dirty || userForm.controls['dob']?.touched)">
+    <div *ngIf="userForm.controls['dob']?.errors?.required">Date of Birth is required.</div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="password">Password : </label>
+  <input type="password" id="password" name="password" class="form-control" 
+         [(ngModel)]="user.password" required minlength="6" maxlength="20" 
+         pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$">
+  <div *ngIf="userForm.controls['password']?.invalid && (userForm.controls['password']?.dirty || userForm.controls['password']?.touched)">
+    <div *ngIf="userForm.controls['password']?.errors?.required">Password is required.</div>
+    <div *ngIf="userForm.controls['password']?.errors?.minlength">Password must be at least 6 characters.</div>
+    <div *ngIf="userForm.controls['password']?.errors?.maxlength">Password cannot exceed 20 characters.</div>
+    <div *ngIf="userForm.controls['password']?.errors?.pattern">Password must be a combination of alphabets, numbers, and special characters.</div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="phone">Phone Number : </label>
+  <input type="tel" id="phone" name="phone" class="form-control" [(ngModel)]="user.phone" required pattern="[0-9]*">
+  <div *ngIf="userForm.controls['phone']?.invalid && (userForm.controls['phone']?.dirty || userForm.controls['phone']?.touched)">
+    <div *ngIf="userForm.controls['phone']?.errors?.required">Phone Number is required.</div>
+    <div *ngIf="userForm.controls['phone']?.errors?.pattern">Phone Number must contain only numbers.</div>
+  </div>
+</div>
+
+     
+
+    <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Save</button>
+  </form>
+    </div>
+  </body>
+</html>
